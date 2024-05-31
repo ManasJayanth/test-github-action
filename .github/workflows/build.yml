@@ -33,4 +33,3 @@ jobs:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
           bundle-npm-artifacts-mode: true
-          artifact-names: '[ "npm-release-darwin-arm64", "npm-release-linux-x64", "npm-release-win32-x64" ]'
