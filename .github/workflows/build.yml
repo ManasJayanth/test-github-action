@@ -45,6 +45,7 @@ jobs:
           files: npm-release.tgz
 
       - name: Publish to NPM registry
-        run: npm publish --access=public ./npm-release.tgz
+        working-directory: _npm-release
+        run: npm publish --access=public .
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
