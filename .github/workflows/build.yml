@@ -13,11 +13,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install esy
         run: npm install -g esy
-      - uses: esy/github-action@e0a98a39a32b7971943d4a5589b9b9c86ed2ed93
+      - uses: esy/github-action@afa0d895c432d494f925b502b57f518523a97774
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
-      - uses: esy/github-action@e0a98a39a32b7971943d4a5589b9b9c86ed2ed93
+      - uses: esy/github-action@afa0d895c432d494f925b502b57f518523a97774
         id: prepare-npm-artifacts
         with:
           source-cache-key: 20240515-1
@@ -28,7 +28,7 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
-      - uses: esy/github-action@e0a98a39a32b7971943d4a5589b9b9c86ed2ed93
+      - uses: esy/github-action@afa0d895c432d494f925b502b57f518523a97774
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
