@@ -30,6 +30,9 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org'
       - uses: actions/checkout@v4
       - uses: esy/github-action@060fc7176c842a7dad281f4a60d627ca96ae0fc9
         with:
