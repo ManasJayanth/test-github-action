@@ -1,4 +1,5 @@
 {
+  "name": "test-hello",
   "esy": {
     "build": [
       "ocamlopt -c ./hello.ml -o #{self.target_dir}/hello",
