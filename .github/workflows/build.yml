@@ -36,7 +36,7 @@ jobs:
           bundle-npm-artifacts-mode: true
 
       - name: Create tarball
-        run: tar cf npm-release.tgz ./_npm_release
+        run: tar cf npm-release.tgz ./_npm-release
 
       - name: Release
         uses: softprops/action-gh-release@v1
