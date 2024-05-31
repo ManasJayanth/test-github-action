@@ -25,6 +25,8 @@ jobs:
           prepare-npm-artifacts-mode: true
 
   bundle:
+    permissions:
+      contents: write
     needs: build
     runs-on: macos-latest
     steps:
