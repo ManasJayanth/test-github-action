@@ -28,6 +28,7 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: esy/github-action@9b6df890a5258763dcc8ee0996edf61512e30486
         with:
           source-cache-key: 20240515-1
