@@ -7,13 +7,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [windows-latest]
     steps:
       - uses: actions/setup-node@v4
       - uses: actions/checkout@v4
-      - name: Install esy
-        run: npm install -g esy
-      - uses: esy/github-action@060fc7176c842a7dad281f4a60d627ca96ae0fc9
+      - uses: esy/github-action@prometheansacrifice/tools-cache
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
