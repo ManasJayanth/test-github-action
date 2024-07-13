@@ -1,1 +1,1 @@
-let () = print_endline "hello, world :wave:"
+let () = print_endline "hello, world :100:"
