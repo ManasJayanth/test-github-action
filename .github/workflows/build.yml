@@ -7,17 +7,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, macos-latest, macos-13, windows-latest]
     steps:
       - uses: actions/setup-node@v4
       - uses: actions/checkout@v4
-      - uses: esy/github-action@prometheansacrifice/tools-cache
+      - uses: esy/github-action@prometheansacrifice/fix-postinstall
         with:
           setup-esy-npm-package: 'esy'
           setup-esy-version: 'dev'
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
-      - uses: esy/github-action@prometheansacrifice/tools-cache
+      - uses: esy/github-action@prometheansacrifice/fix-postinstall
         id: prepare-npm-artifacts
         with:
           source-cache-key: 20240515-1
@@ -37,7 +37,7 @@ jobs:
         with:
           fetch-depth: 100
           fetch-tags: true
-      - uses: esy/github-action@prometheansacrifice/tools-cache
+      - uses: esy/github-action@prometheansacrifice/fix-postinstall
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
@@ -57,3 +57,29 @@ jobs:
         run: npm publish --access=public .
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, macos-13, windows-latest]
+    needs: bundle
+    steps:
+      - uses: actions/setup-node@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: npm-release
+      - run: npm i --prefix $HOME/prefix -g ./npm-release.tgz
+        if: ${{ runner.os != 'Windows' }}
+        shell: bash
+      - run: npm i --prefix $env:USERPROFILE/prefix -g ./npm-release.tgz
+        if: ${{ runner.os == 'Windows' }}
+        shell: powershell
+      - run: echo $HOME/prefix/bin >> "$GITHUB_PATH"
+        if: ${{ runner.os != 'Windows' }}
+        shell: bash
+      - run: echo $env:USERPROFILE/prefix/bin >> "$env:GITHUB_PATH"
+        if: ${{ runner.os == 'Windows' }}
+        shell: powershell
+      - run: hello
+

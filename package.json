@@ -1,4 +1,5 @@
 {
+  "description": ".",
   "name": "@prometheansacrifice/test-hello",
   "esy": {
     "build": [
