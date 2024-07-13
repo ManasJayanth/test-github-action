@@ -16,7 +16,7 @@ jobs:
           setup-esy-npm-package: 'esy@dev'
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
-      - uses: esy/github-action@060fc7176c842a7dad281f4a60d627ca96ae0fc9
+      - uses: esy/github-action@prometheansacrifice/tools-cache
         id: prepare-npm-artifacts
         with:
           source-cache-key: 20240515-1
