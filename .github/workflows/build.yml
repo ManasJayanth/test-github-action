@@ -72,14 +72,10 @@ jobs:
       - run: npm i --prefix $HOME/prefix -g ./npm-release.tgz
         if: ${{ runner.os != 'Windows' }}
         shell: bash
-      - run: npm i --prefix $env:USERPROFILE/prefix -g ./npm-release.tgz
-        if: ${{ runner.os == 'Windows' }}
-        shell: powershell
       - run: echo $HOME/prefix/bin >> "$GITHUB_PATH"
         if: ${{ runner.os != 'Windows' }}
         shell: bash
-      - run: echo $env:USERPROFILE/prefix/bin >> "$env:GITHUB_PATH"
+      - run: npm i -g ./npm-release.tgz
         if: ${{ runner.os == 'Windows' }}
-        shell: powershell
       - run: hello
 
