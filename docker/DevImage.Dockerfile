@@ -1,5 +1,9 @@
-FROM alpine:3.10
+FROM esydev/esy:nightly-alpine-latest
 
-COPY ./test-entrypoint.sh /entrypoint.sh
+COPY package.json .
+COPY esy.lock .
+RUN esy build-dependencies
+COPY hello.ml .
+RUN esy
 
 ENTRYPOINT ["/entrypoint.sh"]
