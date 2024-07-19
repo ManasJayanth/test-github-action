@@ -24,10 +24,24 @@ jobs:
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
           prepare-npm-artifacts-mode: true
 
+  static-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          file: ./docker/DevImage.Dockerfile
+          push: false
+          tags: user/app:latest
+
   bundle:
     permissions:
       contents: write
-    needs: build
+    needs:
+      - build
+      - static-build
     runs-on: macos-latest
     steps:
       - uses: actions/setup-node@v4
