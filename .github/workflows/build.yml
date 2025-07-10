@@ -11,18 +11,20 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
       - uses: actions/checkout@v4
-      - uses: esy/github-action@prometheansacrifice/fix-postinstall
+      - uses: esy/github-action@master
         with:
           setup-esy-npm-package: 'esy'
-          setup-esy-version: 'dev'
+          setup-esy-version: 'latest'
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
-      - uses: esy/github-action@prometheansacrifice/fix-postinstall
+      - uses: esy/github-action@master
         id: prepare-npm-artifacts
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
           prepare-npm-artifacts-mode: true
+          ocaml-compiler-version: 5.1.1000
+          ocaml-static-compiler-version: 5.1.1000
 
   static-build:
     runs-on: ubuntu-latest
@@ -51,11 +53,13 @@ jobs:
         with:
           fetch-depth: 100
           fetch-tags: true
-      - uses: esy/github-action@prometheansacrifice/fix-postinstall
+      - uses: esy/github-action@master
         with:
           source-cache-key: 20240515-1
           cache-key: ${{ hashFiles('esy.lock/index.json') }}-20240515-1
           bundle-npm-artifacts-mode: true
+          ocaml-compiler-version: 5.1.1000
+          ocaml-static-compiler-version: 5.1.1000
 
       - name: Create tarball
         run: tar cf npm-release.tgz ./_npm-release
